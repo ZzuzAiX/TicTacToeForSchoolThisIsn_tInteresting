@@ -1,0 +1,51 @@
+using System.IO;
+using System;
+
+void beeping()
+{
+    for (int beeping = 0; beeping < 5; beeping++)
+    {
+        Console.Beep();
+    }
+}
+
+beeping();
+string journal;
+bool journaling = false;
+var journalAsaFile = new StringWriter();
+Console.WriteLine("Welcome to the Jean-Luc Picard’s journal, type 'start' to begin.");
+string beginning = Console.ReadLine();
+if (beginning == "start")
+{
+    beeping();
+    journaling = true;
+    Console.WriteLine();
+    Console.WriteLine("Great from now on everything you write will be written into the journal.");
+    System.Threading.Thread.Sleep(1000);
+    beeping();
+    Console.WriteLine("In order to close the entry and save the file you will have to type in 'stop'.");
+    Console.WriteLine();
+}
+if (beginning != "start")
+{
+    beeping();
+    Console.WriteLine();
+    Console.WriteLine("Are you sure you spelled 'start' right?");
+}
+while (true)
+{
+    Console.Write("> ");
+    journal = Console.ReadLine();
+    if (journaling)
+    {
+        journalAsaFile.WriteLine(journal);
+    }
+    if (journal == "stop")
+    {
+        break;
+    }
+}
+string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+string fileName = $"Captain's_Log_{currentDate}.txt";
+beeping();
+Console.WriteLine("Journal saved as " + fileName);
